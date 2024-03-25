@@ -1,18 +1,28 @@
 .DEFAULT_GOAL := build-run
 
+clean:
+	gradle clean
+
 run-dist:
 	./build/install/app/bin/app
 
-build:
+lint:
 	gradle checkstyleMain
 	gradle checkstyleTest
-	gradle test
+
+build:
+	make clean
+	make lint
+	make test
 	gradle installDist
 
-.PHONY: build
+test:
+	gradle test
 
 run:
 	./build/install/app/bin/app ./src/test/resources/file1.json ./src/test/resources/file2.json
 
 report:
 	gradle jacocoTestReport
+
+.PHONY: build
