@@ -23,6 +23,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation ("org.assertj:assertj-core:3.25.2")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 }
 
 tasks.test {
