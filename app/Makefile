@@ -19,7 +19,10 @@ build:
 test:
 	gradle test
 
-run:
+run-json:
+	./build/install/app/bin/app ./src/test/resources/file1.json ./src/test/resources/file2.json
+
+run-yaml:
 	./build/install/app/bin/app ./src/test/resources/file1.json ./src/test/resources/file2.json
 
 report:

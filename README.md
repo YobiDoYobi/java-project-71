@@ -30,3 +30,6 @@ make test
 ```bash
 make lint
 ```
+
+## Demo
+<a href="https://asciinema.org/a/EhSotKN8pTjFmC1kSB7sgnOIb" target="_blank"><img src="https://asciinema.org/a/EhSotKN8pTjFmC1kSB7sgnOIb.svg" /></a>

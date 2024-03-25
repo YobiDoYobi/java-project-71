@@ -22,6 +22,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation ("org.assertj:assertj-core:3.25.2")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2")
 }
 
 tasks.test {

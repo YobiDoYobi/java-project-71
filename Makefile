@@ -17,8 +17,11 @@ build:
 
 .PHONY: build
 
-run:
-	make -C ./app run
+run-json:
+	make -C ./app run-json
+
+run-yaml:
+	make -C ./app run-yaml
 
 report:
 	make -C ./app report
