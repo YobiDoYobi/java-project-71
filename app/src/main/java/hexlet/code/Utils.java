@@ -11,22 +11,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 //import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
-import java.util.Map;
+//import java.util.Map;
 
 public class Utils {
-    static TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
-    };
-
-    public static String serialize(Map<String, String> map) throws JsonProcessingException {
+    /*public static String serialize(Map<String, String> map) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        json = mapper.writeValueAsString(map);
-        return json;
-    }
+        return mapper.writeValueAsString(map);
+    }*/
 
-    public static HashMap<String, String> unserialize(String path) throws IOException {
+    public static <T> HashMap<String, T> unserialize(String path) throws IOException {
         String fileString = readFile(path);
-        HashMap<String, String> fileMap = new HashMap<>();
+        HashMap<String, T> fileMap = new HashMap<>();
         if (path.endsWith(".json")) {
             fileMap = unserializeJSON(fileString);
         } else if (path.endsWith(".yml")) {
@@ -35,14 +30,16 @@ public class Utils {
         return fileMap;
     }
 
-    public static HashMap<String, String> unserializeJSON(String json) throws JsonProcessingException {
+    public static <T> HashMap<String, T> unserializeJSON(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, typeRef);
+        return mapper.readValue(json, new TypeReference<HashMap<String, T>>() {
+        });
     }
 
-    public static HashMap<String, String> unserializeYAML(String yaml) throws JsonProcessingException {
+    public static <T> HashMap<String, T> unserializeYAML(String yaml) throws JsonProcessingException {
         ObjectMapper mapper = new YAMLMapper();
-        return mapper.readValue(yaml, typeRef);
+        return mapper.readValue(yaml, new TypeReference<HashMap<String, T>>() {
+        });
     }
 
     private static String readFile(String path) throws IOException {
