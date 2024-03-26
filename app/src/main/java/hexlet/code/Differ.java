@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Getter
 @AllArgsConstructor
-public class Differ<T> {
+public final class Differ<T> {
     private final String key;
     private final T value;
     private final String type;
