@@ -27,7 +27,7 @@ public class Plain {
                 }
             }
         }
-        return result.toString();
+        return result.toString().trim();
     }
 
     //определяем, примитив ли это или комплексное значение
