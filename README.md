@@ -33,3 +33,6 @@ make lint
 
 ## Demo
 <a href="https://asciinema.org/a/EhSotKN8pTjFmC1kSB7sgnOIb" target="_blank"><img src="https://asciinema.org/a/EhSotKN8pTjFmC1kSB7sgnOIb.svg" /></a>
+
+## Demo 2
+<a href="https://asciinema.org/a/bSjb4FgXMmhhNFoKaFEZSi5Ut" target="_blank"><img src="https://asciinema.org/a/bSjb4FgXMmhhNFoKaFEZSi5Ut.svg" /></a>

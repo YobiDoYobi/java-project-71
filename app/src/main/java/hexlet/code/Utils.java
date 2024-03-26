@@ -9,15 +9,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-//import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.HashMap;
-//import java.util.Map;
 
 public class Utils {
-    /*public static String serialize(Map<String, String> map) throws JsonProcessingException {
+    public static String serialize(ArrayList<Differ> diffList) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(map);
-    }*/
+        return mapper.writeValueAsString(diffList);
+    }
 
     public static <T> HashMap<String, T> unserialize(String path) throws IOException {
         String fileString = readFile(path);
