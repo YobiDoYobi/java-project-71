@@ -1,30 +1,31 @@
 package hexlet.code;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
+@Getter
+@AllArgsConstructor
 public class Differ<T> {
-    public final String key;
-    public final T value;
-    public final String type;
-
-    public Differ(String key, T value, String type) {
-        this.key = key;
-        this.value = value;
-        this.type = type;
-    }
+    private final String key;
+    private final T value;
+    private final String type;
 
     public String toString() {
         return String.format("  %s %s: %s", type.equals("=") ? " " : type, key, value);
     }
+
     //в тз такого требования по такой сигнатуре не было, но автотесты ругались
     //дефолтное значение я определяю средствали picocli вообще
     public static String generate(String filepath1, String filepath2) throws IOException {
         return generate(filepath1, filepath2, "stylish");
     }
+
     public static <T> String generate(String filepath1, String filepath2, String format) throws IOException {
         Map<String, T> file1 = Utils.unserialize(filepath1);
         Map<String, T> file2 = Utils.unserialize(filepath2);
