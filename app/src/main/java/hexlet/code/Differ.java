@@ -1,25 +1,15 @@
 package hexlet.code;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 
-@Getter
-@AllArgsConstructor
 public final class Differ<T> {
-    private final String key;
-    private final T value;
-    private final String type;
-
-    public String toString() {
-        return String.format("  %s %s: %s", type.equals("=") ? " " : type, key, value);
-    }
-
     //в тз такого требования по такой сигнатуре не было, но автотесты ругались
     //дефолтное значение я определяю средствали picocli вообще
     public static String generate(String filepath1, String filepath2) throws IOException {
@@ -27,30 +17,16 @@ public final class Differ<T> {
     }
 
     public static <T> String generate(String filepath1, String filepath2, String format) throws IOException {
-        Map<String, T> file1 = Utils.unserialize(filepath1);
-        Map<String, T> file2 = Utils.unserialize(filepath2);
-        HashSet<String> keySet = new HashSet<>(file1.keySet());
-        keySet.addAll(file2.keySet());
-        ArrayList<String> keyList = new ArrayList<>(keySet);
-        Collections.sort(keyList);
-        ArrayList<Differ> diffList = new ArrayList<>();
-        keyList.forEach(k -> {
-            boolean containsKey1 = file1.containsKey(k);
-            boolean containsKey2 = file2.containsKey(k);
+        Path fullPath1 = Paths.get(filepath1).toAbsolutePath().normalize();
+        String fileString1 = Files.readString(fullPath1);
+        Path fullPath2 = Paths.get(filepath2).toAbsolutePath().normalize();
+        String fileString2 = Files.readString(fullPath2);
 
-            if (containsKey1 && containsKey2) {
-                if (String.valueOf(file1.get(k)).equals(String.valueOf(file2.get(k)))) {
-                    diffList.add(new Differ(k, file1.get(k), "="));
-                } else {
-                    diffList.add(new Differ(k, file1.get(k), "-"));
-                    diffList.add(new Differ(k, file2.get(k), "+"));
-                }
-            } else if (!containsKey1 && containsKey2) {
-                diffList.add(new Differ(k, file2.get(k), "+"));
-            } else if (containsKey1 && !containsKey2) {
-                diffList.add(new Differ(k, file1.get(k), "-"));
-            }
-        });
+        Map<String, T> file1 = Parser.unserialize(fileString1,
+                FilenameUtils.getExtension(fullPath1.getFileName().toString()));
+        Map<String, T> file2 = Parser.unserialize(fileString2,
+                FilenameUtils.getExtension(fullPath1.getFileName().toString()));
+        ArrayList<Map<String, T>> diffList = DiffCreator.getDiff(file1, file2);
         return Formatter.getDiffFormat(diffList, format);
     }
 }

@@ -22,12 +22,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation ("org.assertj:assertj-core:3.25.2")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2")
-    implementation("org.apache.commons:commons-lang3:3.12.0")
-    compileOnly ("org.projectlombok:lombok:1.18.32")
-    annotationProcessor ("org.projectlombok:lombok:1.18.32")
-    testCompileOnly ("org.projectlombok:lombok:1.18.32")
-    testAnnotationProcessor ("org.projectlombok:lombok:1.18.32")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.3")
+    implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation ("commons-io:commons-io:2.15.1")
 }
 
 tasks.test {

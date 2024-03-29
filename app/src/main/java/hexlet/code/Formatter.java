@@ -3,13 +3,14 @@ package hexlet.code;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import static hexlet.code.formatters.JSON.getJSON;
 import static hexlet.code.formatters.Plain.getPlain;
 import static hexlet.code.formatters.Stylish.getStylish;
 
 public class Formatter {
-    static String getDiffFormat(ArrayList<Differ> diffList, String format) throws JsonProcessingException {
+    static <T> String getDiffFormat(ArrayList<Map<String, T>> diffList, String format) throws JsonProcessingException {
         return switch (format) {
             case "stylish" -> getStylish(diffList);
             case "plain" -> getPlain(diffList);

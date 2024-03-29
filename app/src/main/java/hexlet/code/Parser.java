@@ -6,24 +6,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Utils {
-    public static String serialize(ArrayList<Differ> diffList) throws JsonProcessingException {
+public class Parser {
+    public static <T> String serialize(ArrayList<Map<String, T>> diffList) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(diffList);
     }
 
-    public static <T> HashMap<String, T> unserialize(String path) throws IOException {
-        String fileString = readFile(path);
+    public static <T> HashMap<String, T> unserialize(String fileString, String type) throws IOException {
         HashMap<String, T> fileMap = new HashMap<>();
-        if (path.endsWith(".json")) {
+        if (type.equals("json")) {
             fileMap = unserializeJSON(fileString);
-        } else if (path.endsWith(".yml")) {
+        } else if (type.equals("yml")) {
             fileMap = unserializeYAML(fileString);
         }
         return fileMap;
@@ -39,11 +36,6 @@ public class Utils {
         ObjectMapper mapper = new YAMLMapper();
         return mapper.readValue(yaml, new TypeReference<HashMap<String, T>>() {
         });
-    }
-
-    private static String readFile(String path) throws IOException {
-        Path fullPath = Paths.get(path).toAbsolutePath().normalize();
-        return Files.readString(fullPath);
     }
 
     /*public static void writeFile(String path, String content) throws IOException {

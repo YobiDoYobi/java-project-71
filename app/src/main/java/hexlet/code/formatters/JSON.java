@@ -1,13 +1,13 @@
 package hexlet.code.formatters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.Differ;
-import hexlet.code.Utils;
+import hexlet.code.Parser;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class JSON {
-    public static String getJSON(ArrayList<Differ> diffList) throws JsonProcessingException {
-        return Utils.serialize(diffList);
+    public static <T> String getJSON(ArrayList<Map<String, T>> diffList) throws JsonProcessingException {
+        return Parser.serialize(diffList);
     }
 }

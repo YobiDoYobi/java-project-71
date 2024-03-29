@@ -7,6 +7,10 @@
 # Description
 Compares two configuration files and shows a difference.
 
+Input format: json or yaml.
+
+Output format: stylish, plain, json.
+
 ## Test, checkstyle and setup
 
 ```bash
