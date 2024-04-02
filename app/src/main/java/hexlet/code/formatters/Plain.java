@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Plain {
-    public static <T> String getPlain(ArrayList<Map<String, T>> diffList) {
+    public static String getPlain(ArrayList<Map<String, Object>> diffList) {
         StringBuilder result = new StringBuilder();
         diffList.forEach(diff -> {
             Enum type = (Enum) diff.get("type");
@@ -15,7 +15,7 @@ public class Plain {
 
             if (type == ActionType.ADDED) {
                 result.append(String.format("Property '%s' was added with value: %s\n",
-                        key, complexOrValue(diff.get("value2"))));
+                        key, complexOrValue(diff.get("value"))));
             } else if (type == ActionType.DELETED) {
                 result.append(String.format("Property '%s' was removed\n", key));
             } else if (type == ActionType.CHANGED) {
@@ -27,11 +27,10 @@ public class Plain {
     }
 
     //определяем, примитив ли это или комплексное значение
-    //определяем, примитив ли это или комплексное значение
     private static String complexOrValue(Object diff) {
         if (diff == null) {
             return "null";
-        } else if (diff.getClass() == String.class) {
+        } else if (diff instanceof String) {
             return "'" + diff + "'";
         }
         return ClassUtils.isPrimitiveOrWrapper(diff.getClass())

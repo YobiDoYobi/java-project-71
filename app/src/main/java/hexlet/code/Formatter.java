@@ -10,7 +10,7 @@ import static hexlet.code.formatters.Plain.getPlain;
 import static hexlet.code.formatters.Stylish.getStylish;
 
 public class Formatter {
-    static <T> String getDiffFormat(ArrayList<Map<String, T>> diffList, String format) throws JsonProcessingException {
+    static String getDiffFormat(ArrayList<Map<String, Object>> diffList, String format) throws JsonProcessingException {
         return switch (format) {
             case "stylish" -> getStylish(diffList);
             case "plain" -> getPlain(diffList);
