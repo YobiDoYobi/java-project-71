@@ -16,9 +16,13 @@ public class DifferTest {
     private static String expectedJson;
 
     private static String readFile(String fileName) throws Exception {
-        Path path = Paths.get("src", "test", "resources", fileName)
-                .toAbsolutePath().normalize();
+        Path path = getPath(fileName);
         return Files.readString(path);
+    }
+
+    private static Path getPath(String fileName) throws Exception {
+        return Paths.get("src", "test", "resources", fileName)
+                .toAbsolutePath().normalize();
     }
 
     @BeforeAll
@@ -30,8 +34,8 @@ public class DifferTest {
 
     @Test
     void testJSON() throws Exception {
-        String file1 = "src/test/resources/file1.json";
-        String file2 = "src/test/resources/file2.json";
+        String file1 = getPath("file1.json").toString();
+        String file2 = getPath("file2.json").toString();
         assertThat(generate(file1, file2, "plain")).isEqualTo(expectedPlain);
         assertThat(generate(file1, file2, "stylish")).isEqualTo(expectedStylish);
         assertThat(generate(file1, file2, "json")).isEqualTo(expectedJson);
@@ -39,8 +43,8 @@ public class DifferTest {
 
     @Test
     void testYAML() throws Exception {
-        String file1 = "src/test/resources/file1.yml";
-        String file2 = "src/test/resources/file2.yml";
+        String file1 = getPath("file1.yml").toString();
+        String file2 = getPath("file2.yml").toString();
         assertThat(generate(file1, file2, "plain")).isEqualTo(expectedPlain);
         assertThat(generate(file1, file2, "stylish")).isEqualTo(expectedStylish);
         assertThat(generate(file1, file2, "json")).isEqualTo(expectedJson);

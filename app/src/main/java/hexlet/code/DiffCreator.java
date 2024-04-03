@@ -20,14 +20,13 @@ public class DiffCreator {
             boolean containsKey2 = file2.containsKey(k);
             HashMap<String, Object> diff = new HashMap<>();
             diff.put("key", k);
-            if (!containsKey1 && containsKey2) {
+            if (!containsKey1) {
                 diff.put("type", ADDED);
                 diff.put("value", file2.get(k));
-            } else if (containsKey1 && !containsKey2) {
+            } else if (!containsKey2) {
                 diff.put("type", DELETED);
                 diff.put("value", file1.get(k));
-            } else if (containsKey1 && containsKey2
-                    && String.valueOf(file1.get(k)).equals(String.valueOf(file2.get(k)))) {
+            } else if (String.valueOf(file1.get(k)).equals(String.valueOf(file2.get(k)))) {
                 diff.put("type", UNCHANGED);
                 diff.put("value", file1.get(k));
             } else {
